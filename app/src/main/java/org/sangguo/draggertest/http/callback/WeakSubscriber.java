@@ -1,7 +1,7 @@
 package org.sangguo.draggertest.http.callback;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import java.lang.ref.WeakReference;
 import rx.Subscriber;
 

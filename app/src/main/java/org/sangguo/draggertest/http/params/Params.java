@@ -1,17 +1,23 @@
 package org.sangguo.draggertest.http.params;
 
 import android.text.TextUtils;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 /**
  * Created by chenwei on 2017/6/8.
  */
 
 public class Params extends HashMap<String, String> {
+
+  private HashMap<String, File> fileMap;
 
   public Params() {
     //put("device_token", Build.SERIAL);
@@ -20,7 +26,21 @@ public class Params extends HashMap<String, String> {
     //put("platform", Build.MODEL.replace(" ", ""));
   }
 
+  /**
+   * 构造POST请求（包括文件）
+   */
   public Request.Builder buildPostBody() {
+    if (hasFile()) {
+      return buildMultipartBody();
+    } else {
+      return buildFormBody();
+    }
+  }
+
+  /**
+   * 构造Post 纯表单上传Builder
+   */
+  private Request.Builder buildFormBody() {
     FormBody.Builder bodyBuild = new FormBody.Builder();
     for (Entry<String, String> entry : entrySet()) {
       if (entry != null && !TextUtils.isEmpty(entry.getValue())) {
@@ -29,9 +49,37 @@ public class Params extends HashMap<String, String> {
     }
     Request.Builder builder = new Request.Builder();
     builder.post(bodyBuild.build());
+
     return builder;
   }
 
+  /**
+   * 构造Post 多文件上传Builder
+   */
+  private Request.Builder buildMultipartBody() {
+    MultipartBody.Builder bodyBuild =
+        new MultipartBody.Builder("-----").setType(MultipartBody.FORM);
+    for (Entry<String, String> entry : entrySet()) {
+      if (entry != null && !TextUtils.isEmpty(entry.getValue())) {
+        bodyBuild.addFormDataPart(entry.getKey(), entry.getValue());
+      }
+    }
+    if (fileMap != null && fileMap.size() > 0) {
+      for (Entry<String, File> entry : fileMap.entrySet()) {
+        if (entry != null && entry.getValue() != null) {
+          bodyBuild.addFormDataPart(entry.getKey(), entry.getValue().getName(),
+              RequestBody.create(MediaType.parse("application/octet-stream"), entry.getValue()));
+        }
+      }
+    }
+    Request.Builder builder = new Request.Builder();
+    builder.post(bodyBuild.build());
+    return builder;
+  }
+
+  /**
+   * 构造Get请求字符串
+   */
   public String buildGetUrl() {
     StringBuilder builder = new StringBuilder();
     Iterator<Entry<String, String>> iter = entrySet().iterator();
@@ -47,6 +95,24 @@ public class Params extends HashMap<String, String> {
       }
     }
     return builder.toString();
+  }
+
+  public boolean hasFile() {
+    return fileMap != null && !fileMap.isEmpty();
+  }
+
+  public HashMap<String, File> getFileMap() {
+    return fileMap;
+  }
+
+  /**
+   * 上传File
+   */
+  public void putFile(String key, File file) {
+    if (fileMap == null) {
+      fileMap = new HashMap<>();
+    }
+    fileMap.put(key, file);
   }
 
   public void put(String key, int v) {
