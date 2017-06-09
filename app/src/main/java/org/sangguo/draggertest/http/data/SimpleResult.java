@@ -4,6 +4,7 @@ import java.io.Serializable;
 import org.json.JSONObject;
 
 /**
+ * 默认返回数据模板
  * Created by chenwei on 2017/6/9.
  */
 
@@ -30,5 +31,13 @@ public class SimpleResult implements Result, Serializable {
 
   @Override public String msg() {
     return msg;
+  }
+
+  @Override public String toString() {
+    return "SimpleResult{" +
+        "data='" + data + '\'' +
+        ", code=" + code +
+        ", msg='" + msg + '\'' +
+        '}';
   }
 }
