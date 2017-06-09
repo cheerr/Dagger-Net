@@ -3,8 +3,7 @@ package org.sangguo.draggertest.modules.home.activity;
 import android.os.Bundle;
 import javax.inject.Inject;
 import org.sangguo.draggertest.R;
-import org.sangguo.draggertest.http.Api;
-import org.sangguo.draggertest.http.callback.ResponseListener;
+import org.sangguo.draggertest.http.ApiEnum;
 import org.sangguo.draggertest.http.callback.WeakResponseListener;
 import org.sangguo.draggertest.http.callback.WeakSubscriber;
 import org.sangguo.draggertest.http.params.Params;
@@ -21,7 +20,7 @@ public class MainActivity extends InjectMainActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    Api.TEST1.execute(new Params(), MainData.class)
+    ApiEnum.TEST1.execute(new Params(), MainData.class)
         .subscribe(new WeakSubscriber<MainData>(getActivity()) {
           @Override public void onDataSuccess(MainData mainData) {
 
@@ -32,7 +31,7 @@ public class MainActivity extends InjectMainActivity {
           }
         });
 
-    Api.TEST3.execute(new Params(), new WeakResponseListener(getActivity()) {
+    ApiEnum.TEST3.execute(new Params(), new WeakResponseListener(getActivity()) {
 
     });
   }

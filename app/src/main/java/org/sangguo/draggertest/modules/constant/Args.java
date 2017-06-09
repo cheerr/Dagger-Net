@@ -1,4 +1,4 @@
-package org.sangguo.draggertest.constants;
+package org.sangguo.draggertest.modules.constant;
 
 /**
  * 传参统一到一起

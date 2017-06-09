@@ -6,7 +6,7 @@ import okhttp3.Request;
  * Created by chenwei on 2017/6/8.
  */
 
-public interface RequestBuilderDo {
+public interface RequestBuilderDeal {
 
   public void handle(Request.Builder builder);
 }

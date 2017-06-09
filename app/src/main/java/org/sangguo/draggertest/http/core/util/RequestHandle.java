@@ -19,7 +19,7 @@ public class RequestHandle {
 
   //get方法异步请求数据
   public static void getURL(OkHttpClient client, String baseUrl, Params params,
-      RequestBuilderDo builderDo, @NonNull ResponseInterface handlerInterface) {
+      RequestBuilderDeal builderDo, @NonNull ResponseInterface handlerInterface) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
       String url = baseUrl + (params == null ? "" : ("?" + params.buildGetUrl()));
       Log.i("http", url);
@@ -37,7 +37,7 @@ public class RequestHandle {
 
   //get方法同步请求数据
   private static void getSyncURL(OkHttpClient client, String baseUrl, Params params,
-      RequestBuilderDo builderDo, @NonNull ResponseInterface handlerInterface) {
+      RequestBuilderDeal builderDo, @NonNull ResponseInterface handlerInterface) {
 
     String url = baseUrl + (params == null ? "" : ("?" + params.buildGetUrl()));
 
@@ -61,7 +61,7 @@ public class RequestHandle {
 
   //post方法异步请求数据
   public static void postURL(OkHttpClient client, String baseUrl, Params params,
-      RequestBuilderDo builderDo, @NonNull ResponseInterface handlerInterface) {
+      RequestBuilderDeal builderDo, @NonNull ResponseInterface handlerInterface) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
       Log.i("http", baseUrl + "?" + params.buildGetUrl());
 
@@ -80,7 +80,7 @@ public class RequestHandle {
   //post方法同步请求数据
 
   private static void postSyncURL(OkHttpClient client, String baseUrl, Params params,
-      RequestBuilderDo builderDo, @NonNull ResponseInterface handlerInterface) {
+      RequestBuilderDeal builderDo, @NonNull ResponseInterface handlerInterface) {
     Log.i("http", baseUrl + "?" + params.buildGetUrl());
     Request.Builder builder = params.buildPostBody()
         .url(baseUrl);

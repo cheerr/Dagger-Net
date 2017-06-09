@@ -1,7 +1,7 @@
 package org.sangguo.draggertest.http.callback;
 
-import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import java.io.IOException;
@@ -11,6 +11,8 @@ import okhttp3.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.sangguo.draggertest.R;
+import org.sangguo.draggertest.http.data.Result;
+import org.sangguo.draggertest.http.data.SimpleResult;
 import org.sangguo.draggertest.utils.Res;
 import org.sangguo.draggertest.utils.RunnablePost;
 
@@ -103,13 +105,15 @@ public abstract class ResponseInterface implements Callback {
   /**
    * 判断是否返回成功
    */
-  protected boolean isResponseSuccess(JSONObject body) {
-    boolean hasStatus = body.has("status");
-    if (hasStatus) {
-      int status = body.optInt("status");
-      return (status == 200);
-    }
-    return false;
+  protected boolean isResponseSuccess(@NonNull Result result) {
+    return result.code() == 200;
+  }
+
+  /**
+   * JSONObject 转换为Result的实现方式
+   */
+  @NonNull protected Result jsonToResult(JSONObject json) {
+    return new SimpleResult(json);
   }
 
   @Override public void onFailure(Call call, IOException e) {
@@ -143,14 +147,15 @@ public abstract class ResponseInterface implements Callback {
         return;
       }
 
-      if (isResponseSuccess(jsonObject)) {
+      Result result = jsonToResult(jsonObject);
+
+      if (isResponseSuccess(result)) {
         handleResponseFinish();
         handleResponseSuccess(jsonObject);
       } else {
-        int status = jsonObject.optInt("status", NetErrorCode.SERVER_EXCEPTION);
         handleResponseFinish();
-        handleResponseFailure(status, jsonObject.optString("msg"));
-        handleResponseFailureJSONObject(status, jsonObject);
+        handleResponseFailure(result.code(), result.msg());
+        handleResponseFailureJSONObject(result.code(), jsonObject);
       }
     }
   }

@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.util.Log;
 import javax.inject.Inject;
 import org.sangguo.draggertest.R;
-import org.sangguo.draggertest.constants.Args;
 import org.sangguo.draggertest.internal.scope.PerActivity;
 import org.sangguo.draggertest.modules.abs.BaseActivity;
+import org.sangguo.draggertest.modules.constant.Args;
 import org.sangguo.draggertest.modules.home.model.MainData;
 
 /**
