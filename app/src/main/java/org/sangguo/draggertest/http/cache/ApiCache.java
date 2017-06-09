@@ -13,7 +13,7 @@ public class ApiCache {
 
   private static ApiCache instance;
 
-  private Map<String, ApiInterface> cacheMap;
+  private Map<Class, ApiInterface> cacheMap;
 
   private ApiCache() {
     cacheMap = new HashMap<>();
@@ -40,7 +40,7 @@ public class ApiCache {
     Log.i("http", "apiClass:" + apiClass.getName());
     ApiInterface apiInterface = reflect(apiClass);
     if (apiInterface != null && apiInterface.cache()) {
-      cacheMap.put(apiClass.getName(), apiInterface);
+      cacheMap.put(apiClass, apiInterface);
     }
     return apiInterface;
   }
