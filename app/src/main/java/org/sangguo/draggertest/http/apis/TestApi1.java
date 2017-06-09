@@ -7,9 +7,9 @@ import org.sangguo.draggertest.http.core.ApiImpl;
  * 保证独立性
  * Created by chenwei on 2017/6/8.
  */
-public class TestApi extends ApiImpl {
+public class TestApi1 extends ApiImpl {
 
   @Override public String apiName() {
-    return "service/test/";
+    return "xxx/test/";
   }
 }

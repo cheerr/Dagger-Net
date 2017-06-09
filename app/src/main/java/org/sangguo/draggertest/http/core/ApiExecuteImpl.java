@@ -4,7 +4,6 @@ import org.json.JSONObject;
 import org.sangguo.draggertest.http.cache.ApiCache;
 import org.sangguo.draggertest.http.callback.ResponseInterface;
 import org.sangguo.draggertest.http.callback.ResponseListener;
-import org.sangguo.draggertest.http.core.build.ApiBuild;
 import org.sangguo.draggertest.http.params.Params;
 import org.sangguo.draggertest.http.util.ResponseInterfaceNull;
 import rx.Observable;
@@ -18,17 +17,10 @@ import rx.schedulers.Schedulers;
 public class ApiExecuteImpl implements ApiExecute {
 
   private Class<? extends ApiInterface> apiClass;
-  private ApiBuild apiBuild;
   private ApiInterface api;
 
   public ApiExecuteImpl(Class<? extends ApiInterface> apiClass) {
     this.apiClass = apiClass;
-    this.apiBuild = null;
-  }
-
-  public ApiExecuteImpl(Class<? extends ApiInterface> apiClass, ApiBuild apiBuild) {
-    this.apiClass = apiClass;
-    this.apiBuild = apiBuild;
   }
 
   /**
@@ -36,11 +28,7 @@ public class ApiExecuteImpl implements ApiExecute {
    */
   private ApiInterface prepare() {
     if (api == null) {
-      if (apiBuild != null) {
-        api = ApiCache.newInstance().getApi(apiClass, apiBuild);
-      } else {
-        api = ApiCache.newInstance().getApi(apiClass);
-      }
+      api = ApiCache.newInstance().getApi(apiClass);
     }
     return api;
   }

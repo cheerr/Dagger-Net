@@ -5,7 +5,8 @@ import com.alibaba.fastjson.JSON;
 import okhttp3.OkHttpClient;
 import org.json.JSONObject;
 import org.sangguo.draggertest.http.callback.ResponseInterface;
-import org.sangguo.draggertest.http.core.build.ApiBuild;
+import org.sangguo.draggertest.http.core.configuration.ApiConfiguration;
+import org.sangguo.draggertest.http.core.configuration.ApiConfigurationImpl;
 import org.sangguo.draggertest.http.core.type.ReqType;
 import org.sangguo.draggertest.http.core.util.RequestBuilderDeal;
 import org.sangguo.draggertest.http.core.util.RequestHandle;
@@ -19,24 +20,22 @@ import org.sangguo.draggertest.http.params.Params;
 
 public abstract class ApiImpl implements ApiInterface {
 
-  private ApiBuild apiBuild;
+  private ApiConfiguration apiConfiguration;
 
-  //统一由反射实现
   public ApiImpl() {
-    this(ApiBuild.DEFAULT);
+    apiConfiguration = getApiConfiguration();
   }
 
-  //暂时用不到
-  private ApiImpl(ApiBuild apiBuild) {
-    this.apiBuild = apiBuild == null ? ApiBuild.DEFAULT : apiBuild;
+  @Override public ApiConfiguration getApiConfiguration() {
+    return ApiConfigurationImpl.DEFAULT;
   }
 
   @Override public String baseUrl() {
-    return apiBuild.baseUrl();
+    return apiConfiguration.baseUrl();
   }
 
   @Override public OkHttpClient httpClient() {
-    return apiBuild.httpClient();
+    return apiConfiguration.httpClient();
   }
 
   @Override public ReqType reqType() {

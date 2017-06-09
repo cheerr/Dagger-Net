@@ -1,11 +1,11 @@
 package org.sangguo.draggertest.http;
 
-import org.sangguo.draggertest.http.apis.TestApi;
+import org.sangguo.draggertest.http.apis.TestApi1;
+import org.sangguo.draggertest.http.apis.TestApi2;
 import org.sangguo.draggertest.http.callback.ResponseInterface;
 import org.sangguo.draggertest.http.core.ApiExecute;
 import org.sangguo.draggertest.http.core.ApiExecuteImpl;
 import org.sangguo.draggertest.http.core.ApiInterface;
-import org.sangguo.draggertest.http.core.build.ApiBuild;
 import org.sangguo.draggertest.http.params.Params;
 import rx.Observable;
 
@@ -15,23 +15,14 @@ import rx.Observable;
 
 public enum ApiEnum {
 
-  TEST1(TestApi.class),
-  TEST2(TestApi.class),
-  TEST3(TestApi.class),
-  TEST4(TestApi.class),
-  TEST5(TestApi.class),
-  TEST6(TestApi.class),
-  TEST7(TestApi.class),
-  TEST8(TestApi.class);
+  TEST1(TestApi1.class),
+  TEST2(TestApi2.class),
+  TEST3(TestApi1.class);
 
   private ApiExecute apiExecute;
 
   private ApiEnum(Class<? extends ApiInterface> apiClass) {
     apiExecute = new ApiExecuteImpl(apiClass);
-  }
-
-  private ApiEnum(Class<? extends ApiInterface> apiClass, ApiBuild apiBuild) {
-    apiExecute = new ApiExecuteImpl(apiClass, apiBuild);
   }
 
   /**

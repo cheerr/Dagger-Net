@@ -1,4 +1,4 @@
-package org.sangguo.draggertest.http.core.build.okhttpclient;
+package org.sangguo.draggertest.http.core.configuration.okhttpclient;
 
 import java.util.List;
 import okhttp3.ConnectionSpec;

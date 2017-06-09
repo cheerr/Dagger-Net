@@ -34,8 +34,7 @@ public class MainActivity extends InjectMainActivity {
 
           }
         });
-
-    ApiEnum.TEST3.execute(new Params(), new WeakResponseListener(getActivity()) {
+    ApiEnum.TEST2.execute(new Params(), new WeakResponseListener(getActivity()) {
 
     });
   }

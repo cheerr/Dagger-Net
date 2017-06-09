@@ -1,5 +1,5 @@
 
-package org.sangguo.draggertest.http.core.build.okhttpclient;
+package org.sangguo.draggertest.http.core.configuration.okhttpclient;
 
 import java.io.IOException;
 import okhttp3.Interceptor;
