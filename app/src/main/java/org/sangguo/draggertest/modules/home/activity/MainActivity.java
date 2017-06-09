@@ -29,6 +29,10 @@ public class MainActivity extends InjectMainActivity {
           @Override public void onDataFailure() {
 
           }
+
+          @Override public void onDataCompleted() {
+
+          }
         });
 
     ApiEnum.TEST3.execute(new Params(), new WeakResponseListener(getActivity()) {

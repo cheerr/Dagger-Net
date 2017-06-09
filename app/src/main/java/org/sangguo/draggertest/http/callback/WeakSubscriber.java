@@ -19,10 +19,11 @@ public abstract class WeakSubscriber<T> extends Subscriber<T> {
     }
   }
 
-  protected boolean isShouldDealResponse() {
-
+  /**
+   * 判断对象是否销毁
+   */
+  private boolean isShouldDealResponse() {
     boolean isExist = weakReference != null && weakReference.get() != null;
-
     if (isExist) {
       Object object = weakReference.get();
       if (object instanceof Activity) {
@@ -40,19 +41,27 @@ public abstract class WeakSubscriber<T> extends Subscriber<T> {
 
   public abstract void onDataFailure();
 
-  @Override public void onCompleted() {
-    //todo 可能需要处理
-  }
+  public abstract void onDataCompleted();
 
-  @Override public void onError(Throwable e) {
+  @Override public final void onCompleted() {
     if (isShouldDealResponse()) {
-      onDataFailure();
+      onDataCompleted();
     }
   }
 
-  @Override public void onNext(T t) {
+  //调用onError的时候不会调用onCompleted和onNext
+  @Override public final void onError(Throwable e) {
+    onNext(null);
+    onCompleted();
+  }
+
+  @Override public final void onNext(T t) {
     if (isShouldDealResponse()) {
-      onDataSuccess(t);
+      if (t != null) {
+        onDataSuccess(t);
+      } else {
+        onDataFailure();
+      }
     }
   }
 }
