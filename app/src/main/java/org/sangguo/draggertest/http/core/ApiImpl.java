@@ -5,8 +5,11 @@ import com.alibaba.fastjson.JSON;
 import okhttp3.OkHttpClient;
 import org.json.JSONObject;
 import org.sangguo.draggertest.http.callback.ResponseInterface;
+import org.sangguo.draggertest.http.core.annotation.Get;
+import org.sangguo.draggertest.http.core.annotation.Post;
 import org.sangguo.draggertest.http.core.configuration.ApiConfiguration;
 import org.sangguo.draggertest.http.core.configuration.ApiConfigurationImpl;
+import org.sangguo.draggertest.http.core.model.AnnotationMsg;
 import org.sangguo.draggertest.http.core.type.ReqType;
 import org.sangguo.draggertest.http.core.util.RequestBuilderDeal;
 import org.sangguo.draggertest.http.core.util.RequestHandle;
@@ -18,12 +21,38 @@ import org.sangguo.draggertest.http.params.Params;
  * Created by chenwei on 2017/6/8.
  */
 
-public abstract class ApiImpl implements ApiInterface {
+public class ApiImpl implements ApiInterface {
 
   private ApiConfiguration apiConfiguration;
 
+  private AnnotationMsg msg;
+
   public ApiImpl() {
     apiConfiguration = getApiConfiguration();
+    analyseAnnotation();
+  }
+
+  /**
+   * 分析注解
+   */
+  private void analyseAnnotation() {
+
+    msg = new AnnotationMsg();
+
+    Class<?> clazz = getClass();
+
+    if (clazz.getAnnotations() != null) {
+      if (clazz.isAnnotationPresent(Get.class)) {
+        Get inject = clazz.getAnnotation(Get.class);
+        msg.reqType = ReqType.GET;
+        msg.api = inject.value();
+      }
+      if (clazz.isAnnotationPresent(Post.class)) {
+        Post inject = clazz.getAnnotation(Post.class);
+        msg.reqType = ReqType.POST;
+        msg.api = inject.value();
+      }
+    }
   }
 
   @Override public ApiConfiguration getApiConfiguration() {
@@ -34,12 +63,16 @@ public abstract class ApiImpl implements ApiInterface {
     return apiConfiguration.baseUrl();
   }
 
+  @Override public String apiName() {
+    return msg.api;
+  }
+
   @Override public OkHttpClient httpClient() {
     return apiConfiguration.httpClient();
   }
 
   @Override public ReqType reqType() {
-    return ReqType.GET;
+    return msg.reqType;
   }
 
   @Override public boolean cache() {
@@ -89,9 +122,4 @@ public abstract class ApiImpl implements ApiInterface {
     Result result = jsonToResult(json);
     return JSON.parseObject(result.data(), clz);
   }
-
-  /*********************************/
-
-  //接口名
-  public abstract String apiName();
 }
