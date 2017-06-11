@@ -2,9 +2,9 @@ package org.sangguo.draggertest;
 
 import android.app.Application;
 import org.sangguo.draggertest.config.App;
-import org.sangguo.draggertest.internal.di.components.ApplicationComponent;
-import org.sangguo.draggertest.internal.di.components.DaggerApplicationComponent;
-import org.sangguo.draggertest.internal.di.modules.ApplicationModule;
+import org.sangguo.draggertest.dagger.di.components.ApplicationComponent;
+import org.sangguo.draggertest.dagger.di.components.DaggerApplicationComponent;
+import org.sangguo.draggertest.dagger.di.modules.ApplicationModule;
 
 /**
  * Created by chenwei on 2017/6/7.

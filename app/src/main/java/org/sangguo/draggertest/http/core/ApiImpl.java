@@ -120,6 +120,8 @@ public class ApiImpl implements ApiInterface {
   @Override public <T> T dataParse(JSONObject json, Class<T> clz) {
 
     Result result = jsonToResult(json);
+
+    if (result.data() == null) return null;
     return JSON.parseObject(result.data(), clz);
   }
 }
