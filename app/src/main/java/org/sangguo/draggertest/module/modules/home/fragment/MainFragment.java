@@ -9,6 +9,6 @@ import org.sangguo.draggertest.module.modules.home.inject.InjectHomeMainBarFragm
 
 public class MainFragment extends InjectHomeMainBarFragment {
   @Override public void inject(HomeMainComponent component) {
-
+    component.inject(this);
   }
 }
