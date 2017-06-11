@@ -4,13 +4,14 @@ import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import org.sangguo.draggertest.http.interfaces.LifeInterface;
 
 /**
  * 提供底层接口支持
  * Created by chenwei on 2017/6/11.
  */
 
-public abstract class AbstractFragmentActivity extends FragmentActivity {
+public abstract class AbstractFragmentActivity extends FragmentActivity implements LifeInterface {
 
   @Override
   public void setContentView(@LayoutRes int id) {
@@ -40,5 +41,9 @@ public abstract class AbstractFragmentActivity extends FragmentActivity {
    */
   public FragmentActivity getActivity() {
     return this;
+  }
+
+  @Override public boolean isDestroy() {
+    return isFinishing();
   }
 }

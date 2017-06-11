@@ -1,21 +1,20 @@
 package org.sangguo.draggertest.http.callback;
 
-import android.app.Activity;
-import android.support.v4.app.Fragment;
 import java.lang.ref.WeakReference;
+import org.sangguo.draggertest.http.interfaces.LifeInterface;
 import rx.Subscriber;
 
 /**
  * Created by chenwei on 2017/6/8.
  */
 
-public abstract class WeakSubscriber<T> extends Subscriber<T> {
+public abstract class LifeSubscriber<T> extends Subscriber<T> {
 
-  private WeakReference<Object> weakReference;
+  private WeakReference<LifeInterface> weakReference;
 
-  public WeakSubscriber(Object object) {
-    if (object != null) {
-      weakReference = new WeakReference<Object>(object);
+  public LifeSubscriber(LifeInterface lifeInterface) {
+    if (lifeInterface != null) {
+      weakReference = new WeakReference<>(lifeInterface);
     }
   }
 
@@ -23,18 +22,7 @@ public abstract class WeakSubscriber<T> extends Subscriber<T> {
    * 判断对象是否销毁
    */
   private boolean isShouldDealResponse() {
-    boolean isExist = weakReference != null && weakReference.get() != null;
-    if (isExist) {
-      Object object = weakReference.get();
-      if (object instanceof Activity) {
-        isExist = !((Activity) object).isFinishing();
-      }
-
-      if (object instanceof Fragment) {
-        isExist = !((Fragment) object).isDetached();
-      }
-    }
-    return isExist;
+    return weakReference != null && weakReference.get() != null && !weakReference.get().isDestroy();
   }
 
   public abstract void onDataSuccess(T t);
