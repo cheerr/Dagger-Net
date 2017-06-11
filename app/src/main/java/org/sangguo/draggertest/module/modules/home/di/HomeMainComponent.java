@@ -6,8 +6,8 @@ import org.sangguo.draggertest.dagger.di.components.ApplicationComponent;
 import org.sangguo.draggertest.dagger.di.modules.ActivityModule;
 import org.sangguo.draggertest.dagger.scope.PerActivity;
 import org.sangguo.draggertest.module.common.toast.di.ToastModule2;
-import org.sangguo.draggertest.module.modules.home.activity.MainActivity;
-import org.sangguo.draggertest.module.modules.home.fragment.MainFragment;
+import org.sangguo.draggertest.module.modules.home.activityfragment.MainActivity;
+import org.sangguo.draggertest.module.modules.home.activityfragment.MainFragment;
 
 /**
  * Created by chenwei on 2017/6/7.

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import java.util.Random;
 import org.sangguo.draggertest.module.abs.activity.BaseActivity;
 import org.sangguo.draggertest.module.constant.Args;
-import org.sangguo.draggertest.module.modules.home.activity.MainActivity;
+import org.sangguo.draggertest.module.modules.home.activityfragment.MainActivity;
 import org.sangguo.draggertest.module.modules.home.model.MainData;
 import org.sangguo.draggertest.utils.launcher.LParams;
 import org.sangguo.draggertest.utils.launcher.LauncherHelper;

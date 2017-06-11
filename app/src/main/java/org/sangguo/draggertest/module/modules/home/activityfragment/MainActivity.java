@@ -1,4 +1,4 @@
-package org.sangguo.draggertest.module.modules.home.activity;
+package org.sangguo.draggertest.module.modules.home.activityfragment;
 
 import android.os.Bundle;
 import javax.inject.Inject;

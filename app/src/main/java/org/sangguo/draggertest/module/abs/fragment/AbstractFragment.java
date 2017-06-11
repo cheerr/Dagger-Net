@@ -4,7 +4,11 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import butterknife.ButterKnife;
 import java.lang.reflect.Field;
 import org.sangguo.draggertest.http.interfaces.LifeInterface;
 
@@ -14,6 +18,15 @@ import org.sangguo.draggertest.http.interfaces.LifeInterface;
  */
 
 public abstract class AbstractFragment extends Fragment implements LifeInterface {
+
+  /**
+   * 支持ButterKnife
+   */
+  @Override
+  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    ButterKnife.bind(this, view);
+  }
 
   @Override public boolean isDestroy() {
     return getActivity() == null || isDetached() || getView() == null;

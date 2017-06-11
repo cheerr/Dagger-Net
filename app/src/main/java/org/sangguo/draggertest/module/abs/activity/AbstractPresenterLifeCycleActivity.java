@@ -2,6 +2,7 @@ package org.sangguo.draggertest.module.abs.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -52,10 +53,10 @@ public abstract class AbstractPresenterLifeCycleActivity extends AbstractFragmen
   }
 
   @Override
-  protected void onViewCreated() {
+  protected void onViewCreated(View view) {
     PresenterInjector.injectPresenter(this);
     for (int i = 0; i < presenters.size(); i++) {
-      presenters.get(i).createdView();
+      presenters.get(i).createdView(view);
     }
   }
 

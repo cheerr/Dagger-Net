@@ -46,7 +46,7 @@ public class AbstractPresenterLifeCycleFragment extends AbstractFragment
     super.onViewCreated(view, savedInstanceState);
     PresenterInjector.injectPresenter(this);
     for (int i = 0; i < presenters.size(); i++) {
-      presenters.get(i).createdView();
+      presenters.get(i).createdView(view);
     }
   }
 

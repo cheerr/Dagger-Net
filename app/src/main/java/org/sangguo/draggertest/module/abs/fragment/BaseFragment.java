@@ -81,7 +81,7 @@ public class BaseFragment extends AbstractPresenterLifeCycleFragment {
     }
   }
 
-  /************简化布局里View的获取*************/
+  /************简化布局里View的获取，底层支持ButterKnife，取决于个人习惯*************/
 
   //简化布局里View的获取
   public <T extends View> T bindView(@IdRes int resId) {

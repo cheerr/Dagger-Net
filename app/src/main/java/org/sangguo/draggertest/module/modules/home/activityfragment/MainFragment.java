@@ -1,4 +1,4 @@
-package org.sangguo.draggertest.module.modules.home.fragment;
+package org.sangguo.draggertest.module.modules.home.activityfragment;
 
 import org.sangguo.draggertest.module.modules.home.di.HomeMainComponent;
 import org.sangguo.draggertest.module.modules.home.inject.InjectHomeMainBarFragment;

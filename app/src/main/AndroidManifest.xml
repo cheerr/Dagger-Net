@@ -25,7 +25,7 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".module.modules.home.activity.MainActivity"
+    <activity android:name=".module.modules.home.activityfragment.MainActivity"
         android:screenOrientation="portrait"/>
 
 

@@ -1,10 +1,11 @@
 package org.sangguo.draggertest.module.modules.home.presenter;
 
 import android.util.Log;
+import android.view.View;
 import javax.inject.Inject;
 import org.sangguo.draggertest.dagger.scope.PerActivity;
 import org.sangguo.draggertest.module.abs.activity.BaseActivity;
-import org.sangguo.draggertest.module.abs.presenter.BasePresenter;
+import org.sangguo.draggertest.module.abs.presenter.BaseViewPresenter;
 import org.sangguo.draggertest.module.common.toast.ToastType;
 import org.sangguo.draggertest.module.modules.home.control.PageControl;
 
@@ -18,17 +19,25 @@ import org.sangguo.draggertest.module.modules.home.control.PageControl;
  * 注解变量放在成员变量里生成，个人感觉比构造函数生成可读性要强
  */
 @PerActivity
-public class MainPresenter extends BasePresenter {
+public class MainPresenter extends BaseViewPresenter {
 
   @Inject PageControl pageControl;
   @Inject ToastType styleToast;
 
+  private BaseActivity activity;
+
   @Inject
-  public MainPresenter(BaseActivity baseActivity) {
+  private MainPresenter(BaseActivity activity) {
+    this.activity = activity;
     Log.i("TAG", "MainPresenter_CREATE" + hashCode());
   }
 
-  @Override public void createdView() {
+  //@Override protected View findViewById(@IdRes int id) {
+  //  return activity.findViewById(id);
+  //}
+
+  @Override public void createdView(View view) {
+    super.createdView(view);
     Log.i("Presenter", "createdView()");
     pageControl.init();
 
