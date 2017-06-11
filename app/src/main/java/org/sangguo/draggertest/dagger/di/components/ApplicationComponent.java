@@ -4,9 +4,9 @@ import android.content.Context;
 import dagger.Component;
 import javax.inject.Singleton;
 import org.sangguo.draggertest.TestApplication;
-import org.sangguo.draggertest.module.user.profile.UserProfile;
 import org.sangguo.draggertest.dagger.di.modules.ApplicationModule;
 import org.sangguo.draggertest.dagger.qualifier.ApplicationContext;
+import org.sangguo.draggertest.module.user.profile.UserProfile;
 
 /**
  * Created by chenwei on 2017/6/7.

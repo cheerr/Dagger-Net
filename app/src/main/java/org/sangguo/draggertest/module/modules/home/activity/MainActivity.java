@@ -4,11 +4,11 @@ import android.os.Bundle;
 import javax.inject.Inject;
 import org.sangguo.draggertest.R;
 import org.sangguo.draggertest.module.abs.presenter.PresenterLifeCycle;
-import org.sangguo.draggertest.module.modules.home.di.MainActivityComponent;
-import org.sangguo.draggertest.module.modules.home.inject.InjectMainActivity;
+import org.sangguo.draggertest.module.modules.home.di.HomeMainComponent;
+import org.sangguo.draggertest.module.modules.home.inject.InjectHomeMainBarActivity;
 import org.sangguo.draggertest.module.modules.home.presenter.MainPresenter;
 
-public class MainActivity extends InjectMainActivity {
+public class MainActivity extends InjectHomeMainBarActivity {
 
   @Inject @PresenterLifeCycle MainPresenter presenter;
 
@@ -18,7 +18,7 @@ public class MainActivity extends InjectMainActivity {
   }
 
   @Override
-  public void inject(MainActivityComponent component) {
+  public void inject(HomeMainComponent component) {
     component.inject(this);
   }
 }

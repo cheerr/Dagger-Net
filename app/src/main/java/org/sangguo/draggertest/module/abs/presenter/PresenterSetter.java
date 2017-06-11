@@ -6,5 +6,5 @@ package org.sangguo.draggertest.module.abs.presenter;
 
 public interface PresenterSetter {
 
-  public void setPresenter(Presenter presenter);
+  public void addPresenter(Presenter presenter);
 }

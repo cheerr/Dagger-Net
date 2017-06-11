@@ -4,6 +4,8 @@ import android.content.Intent;
 
 public interface Presenter {
 
+  int priority(); //优先级，用于排序
+
   void createdView();
 
   void start();

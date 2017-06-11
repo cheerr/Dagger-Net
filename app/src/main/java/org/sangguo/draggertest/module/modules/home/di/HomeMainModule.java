@@ -12,7 +12,7 @@ import org.sangguo.draggertest.module.modules.home.control.PageControlImpl;
  */
 
 @Module
-public class MainActivityModule {
+public class HomeMainModule {
 
   @Provides @PerActivity PageControl providePageControl(PageControlImpl impl) {
     return impl;

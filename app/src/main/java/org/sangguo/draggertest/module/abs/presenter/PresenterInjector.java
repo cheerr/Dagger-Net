@@ -22,9 +22,8 @@ public class PresenterInjector {
         field.setAccessible(true);
         try {
           Object obj = field.get(setter);
-          if (obj instanceof Presenter) {
-            setter.setPresenter((Presenter) obj);
-            return;
+          if (obj != null && obj instanceof Presenter) {
+            setter.addPresenter((Presenter) obj);
           }
         } catch (IllegalAccessException e) {
           e.printStackTrace();

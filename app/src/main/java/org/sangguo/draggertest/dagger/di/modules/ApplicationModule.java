@@ -5,9 +5,9 @@ import dagger.Module;
 import dagger.Provides;
 import javax.inject.Singleton;
 import org.sangguo.draggertest.TestApplication;
+import org.sangguo.draggertest.dagger.qualifier.ApplicationContext;
 import org.sangguo.draggertest.module.user.profile.UserProfile;
 import org.sangguo.draggertest.module.user.profile.UserProfileImpl;
-import org.sangguo.draggertest.dagger.qualifier.ApplicationContext;
 
 @Module
 public class ApplicationModule {

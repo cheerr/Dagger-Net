@@ -8,6 +8,10 @@ import android.content.Intent;
 
 public abstract class BasePresenter implements Presenter {
 
+  @Override public int priority() {
+    return 0;
+  }
+
   @Override public void start() {
 
   }

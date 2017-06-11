@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import org.sangguo.draggertest.http.interfaces.LifeInterface;
 
 /**
- * 提供底层接口支持
+ * 提供底层支持
  * Created by chenwei on 2017/6/11.
  */
 
@@ -16,23 +16,32 @@ public abstract class AbstractFragmentActivity extends FragmentActivity implemen
   @Override
   public void setContentView(@LayoutRes int id) {
     super.setContentView(id);
-    onViewCreated();
+    handleViewCreated();
   }
 
   @Override
   public void setContentView(View view) {
     super.setContentView(view);
-    onViewCreated();
+    handleViewCreated();
   }
 
   @Override
   public void setContentView(View view, ViewGroup.LayoutParams params) {
     super.setContentView(view, params);
-    onViewCreated();
+    handleViewCreated();
+  }
+
+  private boolean viewCreated = false;
+
+  private void handleViewCreated() {
+    if (!viewCreated) {
+      onViewCreated();
+      viewCreated = true;
+    }
   }
 
   /**
-   * 模拟生命周期，View创建之后
+   * 模拟生命周期，View创建之后，只会调用一次
    */
   protected abstract void onViewCreated();
 

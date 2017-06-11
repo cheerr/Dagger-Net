@@ -8,15 +8,17 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.sangguo.draggertest.TestApplication;
-import org.sangguo.draggertest.module.user.profile.UserProfile;
 import org.sangguo.draggertest.dagger.di.components.ApplicationComponent;
 import org.sangguo.draggertest.dagger.di.modules.ActivityModule;
+import org.sangguo.draggertest.module.abs.fragment.BaseFragment;
+import org.sangguo.draggertest.module.user.profile.UserProfile;
 import org.sangguo.draggertest.ui.dialog.DialogControl;
 
 /**
@@ -28,6 +30,17 @@ public class BaseActivity extends AbstractPresenterLifeCycleActivity implements 
 
   private List<BroadcastReceiver> mReceiverList;
   private List<Dialog> mDialogList;
+
+  private BaseFragment currFragment;
+
+  //设置当前作用的Fragment
+  public void setCurrFragment(BaseFragment currFragment) {
+    this.currFragment = currFragment;
+  }
+
+  public BaseFragment getCurrFragment() {
+    return currFragment;
+  }
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -143,6 +156,15 @@ public class BaseActivity extends AbstractPresenterLifeCycleActivity implements 
     }
   }
 
+  @Override
+  public boolean onKeyDown(int keyCode, KeyEvent event) {
+    if (currFragment != null && currFragment.onKeyDown(keyCode, event)) {
+      return true;
+    }
+
+    return super.onKeyDown(keyCode, event);
+  }
+
   /**
    * 页面销毁清理必要的数据
    */
@@ -158,18 +180,52 @@ public class BaseActivity extends AbstractPresenterLifeCycleActivity implements 
       mDialogList.clear();
       mDialogList = null;
     }
+
+    currFragment = null;
   }
 
-  //bindView
+  /************简化布局里View的获取*************/
 
-  public <T> T bindView(@IdRes int id) {
-    return (T) findViewById(id);
+  //简化布局里View的获取
+  public <T extends View> T bindView(@IdRes int resId) {
+    return (T) findViewById(resId);
   }
 
-  public void bindText(@IdRes int id, String string) {
-    View view = bindView(id);
-    if (view instanceof TextView) {
-      ((TextView) view).setText(string);
+  public <T extends View> T bindView(View view, @IdRes int resId) {
+    if (view == null) return null;
+    return (T) view.findViewById(resId);
+  }
+
+  public <T extends View> T bindView(@IdRes int resId, View.OnClickListener listener) {
+    T v = (T) findViewById(resId);
+    if (v != null) {
+      v.setOnClickListener(listener);
     }
+    return v;
+  }
+
+  public <T extends View> T bindView(View view, @IdRes int resId, View.OnClickListener listener) {
+    if (view == null) return null;
+    T v = (T) view.findViewById(resId);
+    if (v != null) {
+      v.setOnClickListener(listener);
+    }
+    return v;
+  }
+
+  public <T extends View> T bindView(@IdRes int resId, boolean visible) {
+    T v = (T) findViewById(resId);
+    if (v != null) {
+      v.setVisibility(visible ? View.VISIBLE : View.GONE);
+    }
+    return v;
+  }
+
+  public <T extends View> T bindText(@IdRes int resId, String text) {
+    T v = (T) findViewById(resId);
+    if (v != null && v instanceof TextView) {
+      ((TextView) v).setText(text);
+    }
+    return v;
   }
 }
