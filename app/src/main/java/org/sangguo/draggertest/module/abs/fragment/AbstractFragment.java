@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import java.lang.reflect.Field;
 import org.sangguo.draggertest.http.interfaces.LifeInterface;
 
@@ -19,13 +20,21 @@ import org.sangguo.draggertest.http.interfaces.LifeInterface;
 
 public abstract class AbstractFragment extends Fragment implements LifeInterface {
 
+  private Unbinder unbinder;
+
   /**
    * 支持ButterKnife
    */
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    ButterKnife.bind(this, view);
+    unbinder = ButterKnife.bind(this, view);
+  }
+
+  @Override public void onDestroyView() {
+    super.onDestroyView();
+    unbinder.unbind();
+    unbinder = null;
   }
 
   @Override public boolean isDestroy() {

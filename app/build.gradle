@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'com.jakewharton.butterknife'
 
 android {
   compileSdkVersion 25
@@ -42,6 +41,6 @@ dependencies {
 
   compile 'com.alibaba:fastjson:1.1.57.android'
 
-  compile 'com.jakewharton:butterknife:8.6.0'
-  annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+  compile 'com.jakewharton:butterknife:8.5.1'
+  apt 'com.jakewharton:butterknife-compiler:8.5.1'
 }

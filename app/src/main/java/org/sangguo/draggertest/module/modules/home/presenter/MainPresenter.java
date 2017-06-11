@@ -31,8 +31,9 @@ public class MainPresenter extends BaseViewPresenter {
 
   private BaseActivity activity;
 
-  @Inject
-  public MainPresenter(BaseActivity activity) {
+  @BindView(R.id.pageText) TextView pageTextView;
+
+  @Inject MainPresenter(BaseActivity activity) {
     this.activity = activity;
     Log.i("TAG", "MainPresenter_CREATE" + hashCode());
   }
@@ -49,8 +50,7 @@ public class MainPresenter extends BaseViewPresenter {
     if (styleToast != null) {
       styleToast.showToast();
     }
-
-   // pageText.setText("ahhahaha");
+    // pageText.setText("ahhahaha");
   }
 
   @OnClick(R.id.pageText)

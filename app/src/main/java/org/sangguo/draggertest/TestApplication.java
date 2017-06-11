@@ -1,6 +1,7 @@
 package org.sangguo.draggertest;
 
 import android.app.Application;
+import butterknife.ButterKnife;
 import org.sangguo.draggertest.config.App;
 import org.sangguo.draggertest.dagger.di.components.ApplicationComponent;
 import org.sangguo.draggertest.dagger.di.components.DaggerApplicationComponent;
@@ -20,6 +21,7 @@ public class TestApplication extends Application {
     super.onCreate();
     this.initializeInjector();
     this.initializeApp();
+    ButterKnife.setDebug(BuildConfig.DEBUG);
   }
 
   /**
