@@ -3,7 +3,7 @@ package org.sangguo.draggertest.module.modules.home.inject;
 import android.os.Bundle;
 import org.sangguo.draggertest.dagger.HasComponent;
 import org.sangguo.draggertest.module.abs.activity.BaseBarActivity;
-import org.sangguo.draggertest.module.modules.home.di.DaggerMainActivityComponent;
+import org.sangguo.draggertest.module.modules.home.di.DaggerHomeMainComponent;
 import org.sangguo.draggertest.module.modules.home.di.HomeMainComponent;
 import org.sangguo.draggertest.module.modules.home.di.HomeMainModule;
 
@@ -28,9 +28,9 @@ public abstract class InjectHomeMainBarActivity extends BaseBarActivity
 
   private void initializeInjector() {
     this.component =
-        DaggerMainActivityComponent.builder().applicationComponent(getApplicationComponent())
+        DaggerHomeMainComponent.builder().applicationComponent(getApplicationComponent())
             .activityModule(getActivityModule())
-            .mainActivityModule(new HomeMainModule())
+            .homeMainModule(new HomeMainModule())
             .build();
     this.inject(component);
   }

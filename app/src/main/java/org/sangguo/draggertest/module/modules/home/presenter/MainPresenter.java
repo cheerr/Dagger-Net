@@ -2,7 +2,12 @@ package org.sangguo.draggertest.module.modules.home.presenter;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+import butterknife.BindView;
+import butterknife.OnClick;
 import javax.inject.Inject;
+import org.sangguo.draggertest.R;
 import org.sangguo.draggertest.dagger.scope.PerActivity;
 import org.sangguo.draggertest.module.abs.activity.BaseActivity;
 import org.sangguo.draggertest.module.abs.presenter.BaseViewPresenter;
@@ -27,7 +32,7 @@ public class MainPresenter extends BaseViewPresenter {
   private BaseActivity activity;
 
   @Inject
-  private MainPresenter(BaseActivity activity) {
+  public MainPresenter(BaseActivity activity) {
     this.activity = activity;
     Log.i("TAG", "MainPresenter_CREATE" + hashCode());
   }
@@ -44,6 +49,13 @@ public class MainPresenter extends BaseViewPresenter {
     if (styleToast != null) {
       styleToast.showToast();
     }
+
+   // pageText.setText("ahhahaha");
+  }
+
+  @OnClick(R.id.pageText)
+  public void onPageTextClick(View view) {
+    Toast.makeText(activity, "onPageTextClick", Toast.LENGTH_SHORT).show();
   }
 
   @Override public void resume() {
