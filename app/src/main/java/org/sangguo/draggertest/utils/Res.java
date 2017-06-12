@@ -1,5 +1,6 @@
 package org.sangguo.draggertest.utils;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
@@ -14,23 +15,29 @@ import org.sangguo.draggertest.config.App;
 
 public class Res {
 
+  private static Context appContext;
+
+  public static void initRes(Context context) {
+    Res.appContext = context.getApplicationContext();
+  }
+
   public static String string(@StringRes int id) {
-    return App.appContext.getString(id);
+    return Res.appContext.getString(id);
   }
 
   public static int color(@ColorRes int id) {
-    return ContextCompat.getColor(App.appContext, id);
+    return ContextCompat.getColor(Res.appContext, id);
   }
 
   public static Drawable drawable(@DrawableRes int id) {
-    return ContextCompat.getDrawable(App.appContext, id);
+    return ContextCompat.getDrawable(Res.appContext, id);
   }
 
   public static float dimen(@DimenRes int id) {
-    return App.appContext.getResources().getDimension(id);
+    return Res.appContext.getResources().getDimension(id);
   }
 
   public static float dimensionPixelSize(@DimenRes int id) {
-    return App.appContext.getResources().getDimensionPixelSize(id);
+    return Res.appContext.getResources().getDimensionPixelSize(id);
   }
 }

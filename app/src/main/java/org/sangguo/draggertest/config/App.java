@@ -2,6 +2,7 @@ package org.sangguo.draggertest.config;
 
 import android.app.Application;
 import android.content.Context;
+import org.sangguo.draggertest.utils.Res;
 
 /**
  * Created by chenwei on 2017/6/7.
@@ -14,5 +15,6 @@ public class App {
 
   public static void initApp(Application application) {
     App.appContext = application.getApplicationContext();
+    Res.initRes(application);
   }
 }

@@ -1,7 +1,8 @@
 package org.sangguo.draggertest.module.modules.home.inject;
 
 import android.os.Bundle;
-import org.sangguo.draggertest.dagger.HasComponent;
+import org.sangguo.draggertest.dagger.ComponentGetter;
+import org.sangguo.draggertest.dagger.ComponentInject;
 import org.sangguo.draggertest.module.abs.activity.BaseBarActivity;
 import org.sangguo.draggertest.module.modules.home.di.DaggerHomeMainComponent;
 import org.sangguo.draggertest.module.modules.home.di.HomeMainComponent;
@@ -17,7 +18,7 @@ import org.sangguo.draggertest.module.modules.home.di.HomeMainModule;
  * 本身没实现什么业务逻辑，只是方便子类继承使用
  */
 public abstract class InjectHomeMainBarActivity extends BaseBarActivity
-    implements HasComponent<HomeMainComponent> {
+    implements ComponentGetter<HomeMainComponent>, ComponentInject<HomeMainComponent> {
 
   private HomeMainComponent component;
 

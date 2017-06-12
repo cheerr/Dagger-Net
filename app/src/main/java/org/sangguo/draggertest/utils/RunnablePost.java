@@ -10,14 +10,16 @@ import android.support.annotation.NonNull;
 
 public class RunnablePost {
 
+  /**
+   * 在MainLooper上执行
+   */
   public static void post(@NonNull Runnable runnable) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
-      runnable.run();
-    } else {
-      new Handler(Looper.getMainLooper()).post(runnable);
-    }
+    RunnablePost.postOn(runnable, Looper.getMainLooper());
   }
 
+  /**
+   * 指定looper执行
+   */
   public static void postOn(@NonNull Runnable runnable, Looper looper) {
     if (looper == null || Looper.myLooper() == looper) {
       runnable.run();
