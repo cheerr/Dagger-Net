@@ -17,7 +17,7 @@ public abstract class ObserverImplWrapper implements ObserverInterface {
   }
 
   protected String getObserverName() {
-    return getClass().getSimpleName();
+    return getClass().getName();
   }
 
   @Override
