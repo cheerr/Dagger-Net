@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import java.lang.reflect.Field;
 import org.sangguo.draggertest.http.interfaces.LifeInterface;
+import org.sangguo.draggertest.observer.ObserverFactory;
 
 /**
  * 提供底层支持
@@ -21,6 +22,11 @@ import org.sangguo.draggertest.http.interfaces.LifeInterface;
 public abstract class AbstractFragment extends Fragment implements LifeInterface {
 
   private Unbinder unbinder;
+
+  @Override public void onCreate(Bundle savedInstanceState) {
+    beforeOnCreated(savedInstanceState);
+    super.onCreate(savedInstanceState);
+  }
 
   /**
    * 支持ButterKnife
@@ -54,6 +60,19 @@ public abstract class AbstractFragment extends Fragment implements LifeInterface
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public void onDestroy() {
+    ObserverFactory.unregister(this); //统一销毁Activity下的Observer
+    super.onDestroy();
+  }
+
+  /**
+   * 模拟生命周期，OnCreated之前
+   */
+  protected void beforeOnCreated(Bundle savedInstanceState) {
+
   }
 
   /***************Api支持**************/

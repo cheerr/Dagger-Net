@@ -13,6 +13,8 @@ import org.sangguo.draggertest.module.abs.activity.BaseActivity;
 import org.sangguo.draggertest.module.abs.presenter.BaseViewPresenter;
 import org.sangguo.draggertest.module.common.toast.ToastType;
 import org.sangguo.draggertest.module.modules.home.control.PageControl;
+import org.sangguo.draggertest.observer.ObsData;
+import org.sangguo.draggertest.observer.example.UserUpdateObserver;
 
 /**
  * Created by chenwei on 2017/6/7.
@@ -36,6 +38,8 @@ public class MainPresenter extends BaseViewPresenter {
   @Inject MainPresenter(BaseActivity activity) {
     this.activity = activity;
     Log.i("TAG", "MainPresenter_CREATE" + hashCode());
+
+    UserUpdateObserver.newInstance().post(new ObsData().put("avatar", "http://121.32.32.44"));
   }
 
   //@Override protected View findViewById(@IdRes int id) {

@@ -1,11 +1,13 @@
 package org.sangguo.draggertest.module.abs.activity;
 
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import org.sangguo.draggertest.http.interfaces.LifeInterface;
+import org.sangguo.draggertest.observer.ObserverFactory;
 
 /**
  * 提供底层支持
@@ -13,6 +15,11 @@ import org.sangguo.draggertest.http.interfaces.LifeInterface;
  */
 
 public abstract class AbstractFragmentActivity extends FragmentActivity implements LifeInterface {
+
+  @Override protected void onCreate(Bundle savedInstanceState) {
+    beforeOnCreated(savedInstanceState);
+    super.onCreate(savedInstanceState);
+  }
 
   @Override
   public void setContentView(@LayoutRes int id) {
@@ -45,10 +52,23 @@ public abstract class AbstractFragmentActivity extends FragmentActivity implemen
     }
   }
 
+  @Override
+  protected void onDestroy() {
+    ObserverFactory.unregister(this); //统一销毁Activity下的Observer
+    super.onDestroy();
+  }
+
   /**
    * 模拟生命周期，View创建之后，只会调用一次
    */
   protected abstract void onViewCreated(View view);
+
+  /**
+   * 模拟生命周期，OnCreated之前
+   */
+  protected void beforeOnCreated(Bundle savedInstanceState) {
+
+  }
 
   /**
    * 尽量提供和Fragment一致的方法
