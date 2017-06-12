@@ -27,13 +27,7 @@ public interface ApiInterface {
 
   public boolean cache();//是否缓存
 
-  public void encryptParams(Params params); //加密或者修改 参数
-
-  public RequestBuilderDeal requestBuilderDeal();//处理RequestBuilder的类，比如添加Header之类都在这边做
-
   public void request(Params params, ResponseInterface responseInterface);
-
-  public Result jsonToResult(JSONObject json);  //JSONObject 转换为Result的实现方式
 
   public <T> T dataParse(JSONObject json, Class<T> clz); //数据解析
 }

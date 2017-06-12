@@ -21,7 +21,7 @@ import org.sangguo.draggertest.http.params.Params;
  * Created by chenwei on 2017/6/8.
  */
 
-public class ApiImpl implements ApiInterface {
+public class ApiImpl implements ApiInterface, ParamDealInterface, JsonChangeInterface {
 
   private ApiConfiguration apiConfiguration;
 

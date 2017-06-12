@@ -6,6 +6,8 @@ import org.sangguo.draggertest.observer.ObserverImplWrapper;
  * Created by chenwei on 2017/6/12.
  */
 
+//* 子类的实例不需要变成另一个类的对象
+
 public class UserUpdateObserver extends ObserverImplWrapper {
 
   private static UserUpdateObserver instance;

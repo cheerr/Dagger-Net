@@ -15,6 +15,10 @@ import okhttp3.RequestBody;
  * Created by chenwei on 2017/6/8.
  */
 
+/**
+ * 子类扩展，而不是覆盖或者使父类的功能
+ * 子类是一种特殊的类型，而不只是父类的一个角色；
+ **/
 public class Params extends HashMap<String, String> {
 
   private HashMap<String, File> fileMap;

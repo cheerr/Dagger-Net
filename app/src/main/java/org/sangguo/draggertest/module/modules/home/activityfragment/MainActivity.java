@@ -10,7 +10,6 @@ import org.sangguo.draggertest.module.modules.home.inject.InjectHomeMainBarActiv
 import org.sangguo.draggertest.module.modules.home.presenter.MainPresenter;
 import org.sangguo.draggertest.observer.ObsData;
 import org.sangguo.draggertest.observer.ObsRunnable;
-import org.sangguo.draggertest.observer.ObserverFactory;
 import org.sangguo.draggertest.observer.example.UserUpdateObserver;
 
 public class MainActivity extends InjectHomeMainBarActivity {
