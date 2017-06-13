@@ -7,7 +7,6 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
-import org.sangguo.draggertest.config.App;
 
 /**
  * Created by chenwei on 2017/6/7.

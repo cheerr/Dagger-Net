@@ -1,6 +1,5 @@
 package org.sangguo.draggertest.http.cache;
 
-import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
 import org.sangguo.draggertest.http.core.ApiInterface;
@@ -37,7 +36,6 @@ public class ApiCache {
     if (cacheMap.get(apiClass) != null) {
       return cacheMap.get(apiClass);
     }
-    Log.i("http", "apiClass:" + apiClass.getName());
     ApiInterface apiInterface = reflect(apiClass);
     if (apiInterface != null && apiInterface.cache()) {
       cacheMap.put(apiClass, apiInterface);

@@ -7,28 +7,27 @@ import org.json.JSONObject;
 import org.sangguo.draggertest.http.callback.ResponseInterface;
 import org.sangguo.draggertest.http.core.annotation.Get;
 import org.sangguo.draggertest.http.core.annotation.Post;
-import org.sangguo.draggertest.http.core.configuration.ApiConfiguration;
-import org.sangguo.draggertest.http.core.configuration.ApiConfigurationImpl;
+import org.sangguo.draggertest.http.core.configuration.NetOptions;
 import org.sangguo.draggertest.http.core.model.AnnotationMsg;
 import org.sangguo.draggertest.http.core.type.ReqType;
-import org.sangguo.draggertest.http.core.util.RequestBuilderDeal;
+import org.sangguo.draggertest.http.core.util.RequestBuilderFilter;
 import org.sangguo.draggertest.http.core.util.RequestHandle;
 import org.sangguo.draggertest.http.data.Result;
-import org.sangguo.draggertest.http.data.SimpleResult;
 import org.sangguo.draggertest.http.params.Params;
 
 /**
  * Created by chenwei on 2017/6/8.
  */
 
-public class ApiImpl implements ApiInterface, ParamDealInterface, JsonChangeInterface {
+public class ApiImpl implements ApiInterface, ParamFilter, JsonChanger {
 
-  private ApiConfiguration apiConfiguration;
+  public static NetOptions optionsDefault;
+
+  private NetOptions options = optionsDefault;
 
   private AnnotationMsg msg;
 
   public ApiImpl() {
-    apiConfiguration = getApiConfiguration();
     analyseAnnotation();
   }
 
@@ -55,12 +54,8 @@ public class ApiImpl implements ApiInterface, ParamDealInterface, JsonChangeInte
     }
   }
 
-  @Override public ApiConfiguration getApiConfiguration() {
-    return ApiConfigurationImpl.DEFAULT;
-  }
-
   @Override public String baseUrl() {
-    return apiConfiguration.baseUrl();
+    return options.getBaseUrl();
   }
 
   @Override public String apiName() {
@@ -68,7 +63,11 @@ public class ApiImpl implements ApiInterface, ParamDealInterface, JsonChangeInte
   }
 
   @Override public OkHttpClient httpClient() {
-    return apiConfiguration.httpClient();
+    OkHttpClient okHttpClient = options.getOkHttpClient();
+    if (okHttpClient == null) {
+      okHttpClient = new OkHttpClient();
+    }
+    return okHttpClient;
   }
 
   @Override public ReqType reqType() {
@@ -83,34 +82,50 @@ public class ApiImpl implements ApiInterface, ParamDealInterface, JsonChangeInte
 
   }
 
-  @Override public RequestBuilderDeal requestBuilderDeal() {
-    return null;
+  @Override public RequestBuilderFilter requestBuilderFilter() {
+    return options.getRequestBuilderFilter();
   }
 
   @Override public final void request(Params params, ResponseInterface responseInterface) {
 
+    if (options == null) {
+      options = optionsDefault;
+    }
+
     //配置参数获取
     OkHttpClient client = httpClient();
-    RequestBuilderDeal builderDeal = requestBuilderDeal();
-    String baseUrl = baseUrl();
+    RequestBuilderFilter builderDeal = requestBuilderFilter();
+
+    String url = mergeUrl(baseUrl(), apiName());
 
     //参数处理
     encryptParams(params);
     switch (reqType()) {
       case GET:
-        RequestHandle.getURL(client, baseUrl, params, builderDeal, responseInterface);
+        RequestHandle.getURL(client, url, params, builderDeal, responseInterface);
         break;
       case POST:
-        RequestHandle.postURL(client, baseUrl, params, builderDeal, responseInterface);
+        RequestHandle.postURL(client, url, params, builderDeal, responseInterface);
         break;
     }
+  }
+
+  /**
+   * 暴力合并url
+   */
+  private String mergeUrl(String a, String b) {
+    String c = a + "/" + b;
+    while (c.contains("//")) {
+      c = c.replace("//", "/");
+    }
+    return c;
   }
 
   /**
    * JSONObject 转换为Result的实现方式
    */
   @Override @NonNull public Result jsonToResult(JSONObject json) {
-    return new SimpleResult(json);
+    return options.getJsonChanger().jsonToResult(json);
   }
 
   /**

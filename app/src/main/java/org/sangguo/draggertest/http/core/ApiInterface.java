@@ -3,7 +3,6 @@ package org.sangguo.draggertest.http.core;
 import okhttp3.OkHttpClient;
 import org.json.JSONObject;
 import org.sangguo.draggertest.http.callback.ResponseInterface;
-import org.sangguo.draggertest.http.core.configuration.ApiConfiguration;
 import org.sangguo.draggertest.http.core.type.ReqType;
 import org.sangguo.draggertest.http.params.Params;
 
@@ -12,8 +11,6 @@ import org.sangguo.draggertest.http.params.Params;
  */
 
 public interface ApiInterface {
-
-  public ApiConfiguration getApiConfiguration(); //基础配置
 
   public String baseUrl();
 

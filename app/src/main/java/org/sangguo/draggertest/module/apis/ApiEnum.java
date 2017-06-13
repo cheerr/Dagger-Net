@@ -1,7 +1,5 @@
-package org.sangguo.draggertest.http;
+package org.sangguo.draggertest.module.apis;
 
-import org.sangguo.draggertest.http.apis.TestApi1;
-import org.sangguo.draggertest.http.apis.TestApi2;
 import org.sangguo.draggertest.http.callback.ResponseInterface;
 import org.sangguo.draggertest.http.core.ApiExecute;
 import org.sangguo.draggertest.http.core.ApiExecuteImpl;

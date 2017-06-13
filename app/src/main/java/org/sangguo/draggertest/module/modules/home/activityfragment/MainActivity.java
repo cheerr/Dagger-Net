@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import javax.inject.Inject;
 import org.sangguo.draggertest.R;
+import org.sangguo.draggertest.http.callback.ResponseListener;
+import org.sangguo.draggertest.http.params.Params;
 import org.sangguo.draggertest.module.abs.presenter.PresenterLifeCycle;
+import org.sangguo.draggertest.module.apis.ApiEnum;
 import org.sangguo.draggertest.module.modules.home.di.HomeMainComponent;
 import org.sangguo.draggertest.module.modules.home.inject.InjectHomeMainBarActivity;
 import org.sangguo.draggertest.module.modules.home.presenter.MainPresenter;
@@ -24,6 +27,8 @@ public class MainActivity extends InjectHomeMainBarActivity {
         Log.i("Observer", "" + obsData);
       }
     });
+
+    ApiEnum.TEST1.execute(new Params(), new ResponseListener());
   }
 
   @Override protected void onCreate(Bundle savedInstanceState) {

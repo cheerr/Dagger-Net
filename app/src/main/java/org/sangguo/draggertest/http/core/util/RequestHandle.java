@@ -2,7 +2,6 @@ package org.sangguo.draggertest.http.core.util;
 
 import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -19,14 +18,14 @@ public class RequestHandle {
 
   //get方法异步请求数据
   public static void getURL(OkHttpClient client, String baseUrl, Params params,
-      RequestBuilderDeal builderDo, @NonNull ResponseInterface handlerInterface) {
+      RequestBuilderFilter builderDo, @NonNull ResponseInterface handlerInterface) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
       String url = baseUrl + (params == null ? "" : ("?" + params.buildGetUrl()));
-      Log.i("http", url);
+      ILog.i("http", url);
       Request.Builder builder = new Request.Builder()
           .url(url);
       if (builderDo != null) {
-        builderDo.handle(builder);
+        builderDo.filter(builder);
       }
       Request request = builder.build();
       client.newCall(request).enqueue(handlerInterface.prepare());
@@ -37,16 +36,16 @@ public class RequestHandle {
 
   //get方法同步请求数据
   private static void getSyncURL(OkHttpClient client, String baseUrl, Params params,
-      RequestBuilderDeal builderDo, @NonNull ResponseInterface handlerInterface) {
+      RequestBuilderFilter builderDo, @NonNull ResponseInterface handlerInterface) {
 
     String url = baseUrl + (params == null ? "" : ("?" + params.buildGetUrl()));
 
-    Log.i("http", url);
+    ILog.i("http", url);
 
     Request.Builder builder = new Request.Builder()
         .url(url);
     if (builderDo != null) {
-      builderDo.handle(builder);
+      builderDo.filter(builder);
     }
     Request request = builder.build();
     Call call = client.newCall(request);
@@ -61,14 +60,14 @@ public class RequestHandle {
 
   //post方法异步请求数据
   public static void postURL(OkHttpClient client, String baseUrl, Params params,
-      RequestBuilderDeal builderDo, @NonNull ResponseInterface handlerInterface) {
+      RequestBuilderFilter builderDo, @NonNull ResponseInterface handlerInterface) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
-      Log.i("http", baseUrl + "?" + params.buildGetUrl());
+      ILog.i("http", baseUrl + "?" + params.buildGetUrl());
 
       Request.Builder builder = params.buildPostBody()
           .url(baseUrl);
       if (builderDo != null) {
-        builderDo.handle(builder);
+        builderDo.filter(builder);
       }
       Request request = builder.build();
       client.newCall(request).enqueue(handlerInterface.prepare());
@@ -80,12 +79,12 @@ public class RequestHandle {
   //post方法同步请求数据
 
   private static void postSyncURL(OkHttpClient client, String baseUrl, Params params,
-      RequestBuilderDeal builderDo, @NonNull ResponseInterface handlerInterface) {
-    Log.i("http", baseUrl + "?" + params.buildGetUrl());
+      RequestBuilderFilter builderDo, @NonNull ResponseInterface handlerInterface) {
+    ILog.i("http", baseUrl + "?" + params.buildGetUrl());
     Request.Builder builder = params.buildPostBody()
         .url(baseUrl);
     if (builderDo != null) {
-      builderDo.handle(builder);
+      builderDo.filter(builder);
     }
     Request request = builder.build();
     Call call = client.newCall(request);

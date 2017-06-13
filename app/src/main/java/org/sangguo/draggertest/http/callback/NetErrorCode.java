@@ -10,4 +10,6 @@ public class NetErrorCode {
   public static final int SERVER_RESPONSE_EMPTY = -2;
   public static final int SERVER_EXCEPTION = -3;
 
+
+
 }
