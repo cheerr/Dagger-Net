@@ -13,6 +13,7 @@ import org.sangguo.draggertest.module.abs.activity.BaseActivity;
 import org.sangguo.draggertest.module.abs.presenter.BaseViewPresenter;
 import org.sangguo.draggertest.module.common.toast.ToastType;
 import org.sangguo.draggertest.module.modules.home.control.PageControl;
+import org.sangguo.draggertest.module.modules.home.viewer.MainViewer;
 import org.sangguo.draggertest.observer.ObsData;
 import org.sangguo.draggertest.observer.example.UserUpdateObserver;
 
@@ -33,6 +34,8 @@ public class MainPresenter extends BaseViewPresenter {
 
   private BaseActivity activity;
 
+  private MainViewer viewer;
+
   @BindView(R.id.pageText) TextView pageTextView;
 
   @Inject MainPresenter(BaseActivity activity) {
@@ -40,6 +43,13 @@ public class MainPresenter extends BaseViewPresenter {
     Log.i("TAG", "MainPresenter_CREATE" + hashCode());
 
     UserUpdateObserver.newInstance().post(new ObsData().put("avatar", "http://121.32.32.44"));
+  }
+
+  /**
+   * 设置操作视图
+   */
+  public void setViewer(MainViewer viewer) {
+    this.viewer = viewer;
   }
 
   //@Override protected View findViewById(@IdRes int id) {
@@ -59,7 +69,7 @@ public class MainPresenter extends BaseViewPresenter {
 
   @OnClick(R.id.pageText)
   public void onPageTextClick(View view) {
-    Toast.makeText(activity, "onPageTextClick", Toast.LENGTH_SHORT).show();
+    viewer.showToast("onPageTextClick");
   }
 
   @Override public void resume() {
@@ -75,6 +85,7 @@ public class MainPresenter extends BaseViewPresenter {
    */
   @Override public void destroy() {
     Log.i("Presenter", "destroy()");
+    viewer = null;
     pageControl = null;
     styleToast = null;
   }

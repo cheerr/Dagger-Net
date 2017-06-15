@@ -95,7 +95,7 @@ public class AbstractPresenterLifeCycleFragment extends AbstractFragment
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     for (int i = 0; i < presenters.size(); i++) {
-      presenters.get(i).onActivityResult(requestCode, resultCode, data);
+      presenters.get(i).activityResult(requestCode, resultCode, data);
     }
   }
 }

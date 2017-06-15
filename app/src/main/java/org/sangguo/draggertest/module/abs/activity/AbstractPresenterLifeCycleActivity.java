@@ -48,7 +48,7 @@ public abstract class AbstractPresenterLifeCycleActivity extends AbstractFragmen
   @Override public void onNewIntent(Intent intent) {
     super.onNewIntent(intent);
     for (int i = 0; i < presenters.size(); i++) {
-      presenters.get(i).onNewIntent(intent);
+      presenters.get(i).newIntent(intent);
     }
   }
 
@@ -105,7 +105,7 @@ public abstract class AbstractPresenterLifeCycleActivity extends AbstractFragmen
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     for (int i = 0; i < presenters.size(); i++) {
-      presenters.get(i).onActivityResult(requestCode, resultCode, data);
+      presenters.get(i).activityResult(requestCode, resultCode, data);
     }
   }
 }

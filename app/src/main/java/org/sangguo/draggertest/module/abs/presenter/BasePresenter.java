@@ -20,11 +20,11 @@ public abstract class BasePresenter implements Presenter {
 
   }
 
-  @Override public void onNewIntent(Intent intent) {
+  @Override public void newIntent(Intent intent) {
 
   }
 
-  @Override public void onActivityResult(int requestCode, int resultCode, Intent data) {
+  @Override public void activityResult(int requestCode, int resultCode, Intent data) {
 
   }
 }

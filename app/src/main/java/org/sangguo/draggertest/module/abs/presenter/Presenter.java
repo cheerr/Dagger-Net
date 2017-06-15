@@ -19,7 +19,7 @@ public interface Presenter {
 
   void destroy();
 
-  void onNewIntent(Intent intent);
+  void newIntent(Intent intent);
 
-  void onActivityResult(int requestCode, int resultCode, Intent data);
+  void activityResult(int requestCode, int resultCode, Intent data);
 }
