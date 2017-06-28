@@ -5,8 +5,6 @@ import android.util.Log;
 import android.widget.Toast;
 import javax.inject.Inject;
 import org.sangguo.draggertest.R;
-import org.sangguo.draggertest.http.callback.ResponseListener;
-import org.sangguo.draggertest.http.params.Params;
 import org.sangguo.draggertest.module.abs.presenter.PresenterLifeCycle;
 import org.sangguo.draggertest.module.apis.ApiEnum;
 import org.sangguo.draggertest.module.modules.home.di.HomeMainComponent;
@@ -16,6 +14,8 @@ import org.sangguo.draggertest.module.modules.home.viewer.MainViewer;
 import org.sangguo.draggertest.observer.ObsData;
 import org.sangguo.draggertest.observer.ObsRunnable;
 import org.sangguo.draggertest.observer.example.UserUpdateObserver;
+import thirdparty.http.lib.callback.DefaultResponseListener;
+import thirdparty.http.lib.params.Params;
 
 public class MainActivity extends InjectHomeMainBarActivity implements MainViewer {
 
@@ -30,7 +30,7 @@ public class MainActivity extends InjectHomeMainBarActivity implements MainViewe
       }
     });
 
-    ApiEnum.TEST1.execute(new Params(), new ResponseListener());
+    ApiEnum.TEST1.execute(new Params(), new DefaultResponseListener());
   }
 
   @Override protected void onCreate(Bundle savedInstanceState) {

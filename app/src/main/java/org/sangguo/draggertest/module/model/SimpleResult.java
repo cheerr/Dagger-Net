@@ -1,7 +1,8 @@
-package org.sangguo.draggertest.http.data;
+package org.sangguo.draggertest.module.model;
 
 import java.io.Serializable;
 import org.json.JSONObject;
+import thirdparty.http.lib.data.Result;
 
 /**
  * 默认返回数据模板
@@ -17,7 +18,7 @@ public class SimpleResult implements Result, Serializable {
   public SimpleResult(JSONObject jsonObject) {
     if (jsonObject == null) return;
     data = jsonObject.optString("data", "");
-    code = jsonObject.optInt("code", 0);
+    code = jsonObject.optInt("code", -1);
     msg = jsonObject.optString("msg", "");
   }
 
@@ -31,6 +32,10 @@ public class SimpleResult implements Result, Serializable {
 
   @Override public String msg() {
     return msg;
+  }
+
+  @Override public boolean isSuccess() {
+    return code == 0;
   }
 
   @Override public String toString() {

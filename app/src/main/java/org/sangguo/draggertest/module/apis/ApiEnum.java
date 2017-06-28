@@ -1,11 +1,11 @@
 package org.sangguo.draggertest.module.apis;
 
-import org.sangguo.draggertest.http.callback.ResponseInterface;
-import org.sangguo.draggertest.http.core.ApiExecute;
-import org.sangguo.draggertest.http.core.ApiExecuteImpl;
-import org.sangguo.draggertest.http.core.ApiInterface;
-import org.sangguo.draggertest.http.params.Params;
 import rx.Observable;
+import thirdparty.http.lib.callback.AbstractResponseInterface;
+import thirdparty.http.lib.core.ApiExecute;
+import thirdparty.http.lib.core.ApiExecuteImpl;
+import thirdparty.http.lib.core.ApiInterface;
+import thirdparty.http.lib.params.Params;
 
 /**
  * Created by chenwei on 2017/6/7.
@@ -26,7 +26,7 @@ public enum ApiEnum {
   /**
    * 回调方式请求数据，结果在ResponseInterface里面
    */
-  public void execute(Params params, ResponseInterface handler) {
+  public void execute(Params params, AbstractResponseInterface handler) {
     apiExecute.execute(params, handler);
   }
 

@@ -176,10 +176,13 @@ public class BaseActivity extends AbstractPresenterLifeCycleActivity implements 
       mReceiverList = null;
     }
 
-    if (mDialogList != null && mDialogList.size() > 0) {
-      mDialogList.clear();
-      mDialogList = null;
+    while (mDialogList != null && mDialogList.size() > 0) {
+      Dialog dialog = mDialogList.remove(0);
+      if (dialog.isShowing()) {
+        dialog.dismiss();
+      }
     }
+    mDialogList = null;
 
     currFragment = null;
   }

@@ -27,14 +27,12 @@ import org.sangguo.draggertest.observer.example.UserUpdateObserver;
  * 注解变量放在成员变量里生成，个人感觉比构造函数生成可读性要强
  */
 @PerActivity
-public class MainPresenter extends BaseViewPresenter {
+public class MainPresenter extends BaseViewPresenter<MainViewer> {
 
   @Inject PageControl pageControl;
   @Inject ToastType styleToast;
 
   private BaseActivity activity;
-
-  private MainViewer viewer;
 
   @BindView(R.id.pageText) TextView pageTextView;
 
@@ -43,13 +41,6 @@ public class MainPresenter extends BaseViewPresenter {
     Log.i("TAG", "MainPresenter_CREATE" + hashCode());
 
     UserUpdateObserver.newInstance().post(new ObsData().put("avatar", "http://121.32.32.44"));
-  }
-
-  /**
-   * 设置操作视图
-   */
-  public void setViewer(MainViewer viewer) {
-    this.viewer = viewer;
   }
 
   //@Override protected View findViewById(@IdRes int id) {

@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
  * Created by chenwei on 2017/6/11.
  */
 
-public abstract class BaseViewPresenter extends BasePresenter {
+public abstract class BaseViewPresenter<T> extends BasePresenter<T> {
 
   private View decorView;
 

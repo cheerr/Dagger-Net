@@ -1,7 +1,7 @@
 package org.sangguo.draggertest.ui.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import org.sangguo.draggertest.R;
 
@@ -15,16 +15,18 @@ import org.sangguo.draggertest.R;
 public class BaseDialog extends Dialog {
 
   private DialogControl control;
+  private Activity activity;
 
   public void setControl(DialogControl control) {
     this.control = control;
   }
 
-  public BaseDialog(@NonNull Context context) {
-    super(context, R.style.SimpleDialog);
+  public BaseDialog(@NonNull Activity activity) {
+    super(activity, R.style.SimpleDialog);
 
-    if (context instanceof DialogControl) {
-      this.control = (DialogControl) context;
+    this.activity = activity;
+    if (activity instanceof DialogControl) {
+      this.control = (DialogControl) activity;
     }
   }
 
@@ -36,12 +38,20 @@ public class BaseDialog extends Dialog {
     }
   }
 
-  @Override
-  public void dismiss() {
+  private void superDismiss() {
     if (control != null) {
       control.removeDialog(this);
     }
     super.dismiss();
+  }
+
+  @Override
+  public void dismiss() {
+    if (activity != null && !activity.isFinishing()) {
+
+    } else {
+      superDismiss();
+    }
   }
 }
 

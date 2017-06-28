@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
-import org.sangguo.draggertest.http.interfaces.LifeInterface;
 import org.sangguo.draggertest.observer.ObserverFactory;
+import thirdparty.http.lib.interfaces.LifeInterface;
 
 /**
  * 提供底层支持

@@ -11,8 +11,8 @@ import android.view.View;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import java.lang.reflect.Field;
-import org.sangguo.draggertest.http.interfaces.LifeInterface;
 import org.sangguo.draggertest.observer.ObserverFactory;
+import thirdparty.http.lib.interfaces.LifeInterface;
 
 /**
  * 提供底层支持

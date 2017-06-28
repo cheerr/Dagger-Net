@@ -3,7 +3,7 @@ package org.sangguo.draggertest.observer;
 import android.os.Looper;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import org.sangguo.draggertest.utils.RunnablePost;
+import thirdparty.http.lib.core.util.RunnablePost;
 
 /**
  * Created by chenwei on 2017/6/12.

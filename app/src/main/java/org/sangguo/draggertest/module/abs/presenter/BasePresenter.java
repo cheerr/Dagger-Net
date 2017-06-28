@@ -6,7 +6,17 @@ import android.content.Intent;
  * Created by chenwei on 2017/6/11.
  */
 
-public abstract class BasePresenter implements Presenter {
+public abstract class BasePresenter<T> implements Presenter {
+
+  protected T viewer;
+
+  public T getViewer() {
+    return viewer;
+  }
+
+  public void setViewer(T viewer) {
+    this.viewer = viewer;
+  }
 
   @Override public int priority() {
     return 0;

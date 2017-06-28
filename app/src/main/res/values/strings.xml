@@ -5,5 +5,6 @@
   <string name="connect_network_fail">网络连接失败，请检查网络</string>
   <string name="server_exception">服务器返回异常</string>
   <string name="server_response_empty">服务器返回数据为空</string>
+  <string name="response_data_error">数据解析出错</string>
 
 </resources>

@@ -1,7 +1,7 @@
 package org.sangguo.draggertest.module.apis;
 
-import org.sangguo.draggertest.http.core.ApiImpl;
-import org.sangguo.draggertest.http.core.annotation.Get;
+import thirdparty.http.lib.core.ApiImpl;
+import thirdparty.http.lib.core.annotation.Get;
 
 /**
  * 每条API单独走文件形式
