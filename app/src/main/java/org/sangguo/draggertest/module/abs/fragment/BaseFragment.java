@@ -76,7 +76,7 @@ public class BaseFragment extends AbstractPresenterLifeCycleFragment {
   }
 
   public void runOnUiThread(Runnable runnable) {
-    if (runnable != null && !isDestroy()) {
+    if (runnable != null && getActivity() != null && !isDetached()) {
       getActivity().runOnUiThread(runnable);
     }
   }

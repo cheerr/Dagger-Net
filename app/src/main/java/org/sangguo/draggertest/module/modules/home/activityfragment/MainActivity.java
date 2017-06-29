@@ -14,8 +14,8 @@ import org.sangguo.draggertest.module.modules.home.viewer.MainViewer;
 import org.sangguo.draggertest.observer.ObsData;
 import org.sangguo.draggertest.observer.ObsRunnable;
 import org.sangguo.draggertest.observer.example.UserUpdateObserver;
-import thirdparty.http.lib.callback.DefaultResponseListener;
-import thirdparty.http.lib.params.Params;
+import thirdparty.http.lib.callback.EmptyResponse;
+import thirdparty.http.lib.params.ParamsImpl;
 
 public class MainActivity extends InjectHomeMainBarActivity implements MainViewer {
 
@@ -30,7 +30,7 @@ public class MainActivity extends InjectHomeMainBarActivity implements MainViewe
       }
     });
 
-    ApiEnum.TEST1.execute(new Params(), new DefaultResponseListener());
+    ApiEnum.TEST1.execute(new ParamsImpl(), new EmptyResponse());
   }
 
   @Override protected void onCreate(Bundle savedInstanceState) {

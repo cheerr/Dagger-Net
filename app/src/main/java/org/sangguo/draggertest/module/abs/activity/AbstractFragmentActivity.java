@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
 import org.sangguo.draggertest.observer.ObserverFactory;
-import thirdparty.http.lib.interfaces.LifeInterface;
 
 /**
  * 提供底层支持
  * Created by chenwei on 2017/6/11.
  */
 
-public abstract class AbstractFragmentActivity extends FragmentActivity implements LifeInterface {
+public abstract class AbstractFragmentActivity extends FragmentActivity  {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     beforeOnCreated(savedInstanceState);
@@ -77,7 +76,4 @@ public abstract class AbstractFragmentActivity extends FragmentActivity implemen
     return this;
   }
 
-  @Override public boolean isDestroy() {
-    return isFinishing();
-  }
 }

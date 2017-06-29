@@ -12,14 +12,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import java.lang.reflect.Field;
 import org.sangguo.draggertest.observer.ObserverFactory;
-import thirdparty.http.lib.interfaces.LifeInterface;
 
 /**
  * 提供底层支持
  * Created by chenwei on 2017/6/11.
  */
 
-public abstract class AbstractFragment extends Fragment implements LifeInterface {
+public abstract class AbstractFragment extends Fragment  {
 
   private Unbinder unbinder;
 
@@ -41,10 +40,6 @@ public abstract class AbstractFragment extends Fragment implements LifeInterface
     super.onDestroyView();
     unbinder.unbind();
     unbinder = null;
-  }
-
-  @Override public boolean isDestroy() {
-    return getActivity() == null || isDetached() || getView() == null;
   }
 
   @Override
